@@ -1,0 +1,17 @@
+FROM alphin:latest
+
+ENV TERRAFORM_VERSION=0.14.11
+
+RUN apk add --update curl unzip
+
+RUN unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+
+RUN mv terraform /usr/bin/
+
+RUN rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+
+RUN terraform --version
+
+WORKDIR /app
+
+copy . . 
